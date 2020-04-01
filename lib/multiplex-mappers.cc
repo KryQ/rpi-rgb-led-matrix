@@ -377,6 +377,34 @@ public:
   }
 };
 
+class P8KryQMapper : public MultiplexMapperBase
+{
+public:
+  P8KryQMapper() : MultiplexMapperBase("P8KryQMapper", 2) {}
+
+  void MapSinglePanel(int x, int y, int *matrix_x, int *matrix_y) const
+  {
+    static const int tile_width = 8;
+    static const int tile_height = 5;
+
+    const int vert_block_is_odd = ((y / tile_height) % 2);
+    const int evenOffset[8] = {7, 5, 3, 1, -1, -3, -5, -7};
+
+    if (!vert_block_is_odd)
+    {
+      x = x + (x / tile_width) * tile_width;
+    }
+    else
+    {
+      x = x + (x / tile_width) * tile_width + 8 + evenOffset[x % 8];
+    }
+
+
+    *matrix_x = ((x/tile_width)+1)*tile_width-(x%tile_width)-1;
+    *matrix_y = (y % tile_height) + tile_height * (y / (tile_height * 2));
+  }
+};
+
 /*
  * Here is where the registration happens.
  * If you add an instance of the mapper here, it will automatically be
@@ -401,6 +429,7 @@ static MuxMapperList *CreateMultiplexMapperList() {
   result->push_back(new P10Outdoor1R1G1BMultiplexMapper2());
   result->push_back(new P10Outdoor1R1G1BMultiplexMapper3());
   result->push_back(new P10CoremanMapper());
+  result->push_back(new P8KryQMapper());
   return result;
 }
 
