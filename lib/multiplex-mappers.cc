@@ -446,7 +446,7 @@ namespace rgb_matrix
           x = x + (x / tile_width) * tile_width + 8 + evenOffset[x % 8];
         }
 
-        *matrix_x = ((*matrix_x / 8) + 1) * 8 - (*matrix_x % 8) - 1;
+        *matrix_x = ((x / tile_width) + 1) * tile_width - (x % tile_width) - 1;
         *matrix_y = (y % tile_height) + tile_height * (y / (tile_height * 2));
       }
     };
