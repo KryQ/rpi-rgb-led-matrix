@@ -36,7 +36,6 @@ namespace rgb_matrix
 
     // Return height of font in pixels. Returns -1 if font has not been loaded.
     int height() const { return font_height_; }
-    int width() const { return font_width_; }
 
     // Return baseline. Pixels from the topline to the baseline.
     int baseline() const { return base_line_; }
@@ -78,7 +77,6 @@ namespace rgb_matrix
     const Glyph *FindGlyph(uint32_t codepoint) const;
 
     int font_height_;
-    int font_width_;
     int base_line_;
     CodepointGlyphMap glyphs_;
   };

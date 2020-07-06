@@ -42,7 +42,7 @@ namespace rgb_matrix
     rowbitmap_t bitmap[0]; // contains 'height' elements.
   };
 
-  Font::Font() : font_height_(-1), font_width_(-1), base_line_(0) {}
+  Font::Font() : font_height_(-1), base_line_(0) {}
   Font::~Font()
   {
     for (CodepointGlyphMap::iterator it = glyphs_.begin();
